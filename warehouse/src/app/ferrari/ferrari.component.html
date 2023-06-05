@@ -1,0 +1,280 @@
+<!-- Ferrari navbar -->
+<nav class="navbar navbar-dark bg-dark">
+
+   <div>
+      <button type="button" class="navbar-toggler animated-button1 hvr-grow p-2 m-0 b-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" id="menuColor"><span></span><span></span><span></span><span></span>MENU</button>
+      <button [disabled]="ferraris.length == 10" class="nav-link animated-button1 hvr-grow" (click)="onOpenModal(null!, 'add')" id="addStyle"> <span></span><span></span><span></span><span></span>Add Car <span class="sr-only" >(current)</span></button>
+   </div>
+
+   <a class="navbar-brand" style="color:white;">Miami Ferrari</a>
+   
+   <div id="navbarColor02">
+      <form class="form-inline my-2 my-lg-0">
+         <input type="search" (ngModelChange)="searchFerrari(key?.value)" #key="ngModel" ngModel
+         name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search item..." required>
+      </form>
+   </div>
+</nav>
+<!-- Display ferrari warehouse capacity -->
+   <p id="cap">Capacity: {{ferraris.length}}/10</p>
+
+<!-- Display each card with it's attributes -->
+<div class="container" id="main-container">
+   <div class="row">
+      <div *ngFor="let ferrari of ferraris" class="col-md-6 col-xl-3">
+         <div class="card m-b-30">
+            <div class="size">
+               <a href=""><img src="{{ferrari?.image}}" alt="{{ferrari.model}}" class="img-fluid " id="size"></a>
+            </div>
+            <table>
+               <tbody class="table-active">
+                  <tr >
+                     <td ><span class="infoColor">Model :</span> {{ferrari.model}}</td>
+                     <td><span class="infoColor">Inventory :</span> {{ferrari.dateOfInventory}}</td>
+                  </tr>
+                  <tr>
+                     <td><span class="infoColor">Status :</span> {{ferrari.status}}</td>
+                     <td><span class="infoColor">Amount &nbsp;&nbsp;&nbsp;:</span> {{ferrari.numberOfCars}}</td>
+                  </tr>
+                  <tr>
+                     <td><span class="infoColor">Color &nbsp;&nbsp;:</span>  {{ferrari.color}}</td>
+                     <td><span class="infoColor">Mileage &nbsp;&nbsp;&nbsp;:</span> {{ferrari.mileage}}</td>
+                  </tr>
+                  <tr>
+                     <td><span class="infoColor">Price &nbsp;&nbsp;:</span> {{ferrari.price | currency: 'USD'}}</td>
+                     <td><span class="infoColor">Year&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span> {{ferrari.year}}</td>
+                  </tr>
+               </tbody>
+            </table>
+            <div>Total: {{ferrari.numberOfCars * ferrari.price | currency: 'USD'}}</div>
+               <div>
+                  <div class="float-right btn-group btn-group-sm">
+                     <button (click)="onOpenModal(ferrari, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit">Edit</button>
+                     <button (click)="onOpenModal(ferrari, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete">Delete</button>
+                  </div>
+               </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- Form for addind new ferrari into inventory -->
+<div class="modal fade" id="addFerrariModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+               <h5 class="modal-title" id="addEmployeeModalLabel">Add Ferrari</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+
+         <div class="modal-body">
+            <form class="was-validated" #addForm="ngForm" (ngSubmit)="onAddFerrari(addForm)">
+               <div class="form-group">
+                     <label for="image">Image URL</label>
+                     <input type="text" ngModel name="image" class="form-control" id="imageUrl" placeholder="Image URL" required>
+                  <p class="invalid-feedback">
+                     Cannot be left empty.
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="model">Model</label>
+                     <input type="text" ngModel name="model" class="form-control" id="model" placeholder="Model" minlength="2" maxlength="100" required>
+                  <p class="invalid-feedback">
+                     Must be between 2 and 100 characters.
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="status">Status</label>
+                     <input type="text" ngModel name="status" class="form-control" id="status" placeholder="Status" required>
+                  <p class="invalid-feedback">
+                     Cannot be left empty.
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="color">Color</label>
+                     <input type="text" ngModel name="color" class="form-control" id="color" placeholder="color" required>
+                  <p class="invalid-feedback">
+                     Cannot be left empty.
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="price">Price</label>
+                     <input type="number" ngModel name="price" class="form-control" id="price" placeholder="price" min="0" required>
+                  <p class="invalid-feedback">
+                     A number from zero+.
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="dateOfInventory">Inventory</label>
+                     <input type="date" ngModel name="dateOfInventory" class="form-control" id="dateOfInventory" placeholder="inventory" required>
+                  <p class="invalid-feedback">
+                     Input valid date (mm/dd/yyyy).
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="numberOfCars">Amount</label>
+                     <input type="number" ngModel name="numberOfCars" class="form-control" id="numberOfCars" placeholder="amount" min="1" required>
+                  <p class="invalid-feedback">
+                     A number from one(1).
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="mileage">Mileage</label>
+                     <input type="number" ngModel name="mileage" class="form-control" id="mileage" placeholder="mileage" min="0" required>
+                  <p class="invalid-feedback">
+                     A number from zero+.
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="year">Year</label>
+                     <input type="number" ngModel name="year" class="form-control" id="year" placeholder="year" min="2000" required>
+                  <p class="invalid-feedback">
+                     Year from 2000.
+                  </p>
+               </div>
+
+               <div class="modal-footer">
+                  <button type="button" id="add-ferrari" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button [disabled]="addForm.invalid || ferraris.length == 10" type="submit" class="btn btn-primary" >Add</button>
+               </div>
+            </form>
+        </div>
+     </div>
+   </div>
+</div>
+
+<!-- Form to edit existing item -->
+<div class="modal fade" id="updateFerrariModal" tabindex="-1" role="dialog" aria-labelledby="ferrariEditModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+               <h5 class="modal-title" id="updateFerrariModalLabel">Edit{{editItem?.model}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form class="was-validated" #editForm="ngForm">
+
+               <input type="hidden" ngModel="{{editItem?.id}}" name="id" class="form-control" id="id" placeholder="ID">
+
+               <div class="form-group">
+                     <label for="image">Image URL</label>
+                     <input type="text" ngModel="{{editItem?.image}}" name="image" class="form-control" id="image1" placeholder="Image URL" required>
+                  <p class="invalid-feedback">
+                     Cannot be left empty.
+                  </p>
+               </div>
+
+               <div class="form-group">
+                  <label for="model">Model</label>
+                  <input type="text" ngModel="{{editItem?.model}}" name="model" class="form-control" id="model1" aria-describedby="emailHelp" placeholder="Model" minlength="2" maxlength="100" required>
+                  <p class="invalid-feedback">
+                     Must be between 2 and 100 characters.
+                  </p>
+               </div>
+               
+               <div class="form-group">
+                     <label for="status">Status</label>
+                     <input type="text" ngModel="{{editItem?.status}}" name="status" class="form-control" id="status1" placeholder="Email" required>
+                  <p class="invalid-feedback">
+                     Cannot be left empty.
+                  </p>
+               </div>
+
+               <div class="form-group">
+                  <label for="color">Color</label>
+                  <input type="text" ngModel="{{editItem?.color}}" name="color" class="form-control" id="color1" placeholder="color" required>
+                  <p class="invalid-feedback">
+                     Cannot be left empty.
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="price">Price</label>
+                     <input type="number" ngModel="{{editItem?.price}}" name="price" class="form-control" id="price1" placeholder="Price" min="0" required>
+                  <p class="invalid-feedback">
+                     A number from zero+.
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="dateOfInventory">Inventory</label>
+                     <input type="date" ngModel="{{editItem?.dateOfInventory}}" name="dateOfInventory" class="form-control" id="dateOfInventory1" placeholder="Inventory" required>
+                  <p class="invalid-feedback">
+                     Input valid date (mm/dd/yyyy).
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="numberOfCars">Amount</label>
+                     <input type="number" ngModel="{{editItem?.numberOfCars}}" name="numberOfCars" class="form-control" id="numberOfCars1" placeholder="Amount" min="1" required>
+                  <p class="invalid-feedback">
+                     A number from one(1).
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="mileage">Mileage</label>
+                     <input type="number" ngModel="{{editItem?.mileage}}" name="mileage" class="form-control" id="mileage1" placeholder="Mileage" min="0" required>
+                  <p class="invalid-feedback">
+                     A number from zero+.
+                  </p>
+               </div>
+
+               <div class="form-group">
+                     <label for="year">Year</label>
+                     <input type="number" ngModel="{{editItem?.year}}" name="year" class="form-control" id="year1" placeholder="Year" min="2000" required>
+                  <p class="invalid-feedback">
+                     Year from 2000.
+                  </p>
+               </div>
+               
+               <div class="modal-footer">
+                  <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                  <button [disabled]="editForm.invalid" (click)="onUpdateFerrari(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- Display message for user to confirm when deleting items -->
+<div class="modal fade" id="deleteFerrariModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="deleteModelLabel">Delete</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+               <p>Are you sure you want to delete {{deleteFerrari?.model}}?</p>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+               <button (click)="onDeleteFerrari(deleteFerrari.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+ 
+<!-- Display message when warehouse is empty -->
+<div *ngIf="ferraris?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+   <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO FERRARI!</h4>
+      <p>No cars in Ferrari inventory.</p>
+   </div>
+</div>

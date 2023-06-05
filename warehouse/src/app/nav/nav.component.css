@@ -1,0 +1,13 @@
+.navbar{
+    border-radius: 0px;
+    margin: 0px;
+    position: fixed;
+}
+
+.navbar-brand{
+    font-weight: 800;
+    font-size: xx-large;
+    font-style: oblique;
+    text-align: center;
+    width: 100%;
+}

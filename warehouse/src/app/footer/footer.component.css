@@ -1,0 +1,55 @@
+
+  ul.socialIcons {
+    padding: 16px;
+    text-align: center;
+  }
+
+  .socialIcons li {
+    background-color: yellow;
+    list-style: none;
+    display: inline-block;
+    margin: 4px;
+    border-radius: 2em;
+    overflow: hidden;
+    text-align: left;
+    padding-right: .2355em; 
+  }
+  
+  .socialIcons li a {
+    display: block;
+    padding-left: .1em;
+    padding-right: .1em;
+    min-width: 1.28571429em;
+    max-width: 1.28571429em;
+    white-space: nowrap;
+    line-height: 1.5em;
+    transition: 0.5s;
+    text-decoration: none;
+    font-family: arial;
+    color: #fff;
+    text-align: center;
+    font-size: x-large;
+  }
+  
+  .socialIcons li i {
+    margin-right: 0em;
+  }
+  
+  .socialIcons li:hover a {
+    max-width: 200px;
+  }
+  
+  .socialIcons .linkedin {
+    background-color: #00aced;
+    box-shadow: 0 0 16px #00aced;
+  }
+  
+  .socialIcons .github {
+    background-color: #f96807;
+    box-shadow: 0 0 16px #f96807;
+  }
+
+  footer {
+    height: 5em;
+  }
+  

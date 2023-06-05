@@ -1,0 +1,60 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "TOYOTA": [
+    {
+      "id": 1,
+      "image": null,
+      "name": "TOYOTAhc",
+      "model": "Camry",
+      "year": "2019",
+      "dateOfInventory": "2022-11-07",
+      "numberOfCars": "55",
+      "price": "24,000",
+      "mileage": "30,000",
+      "status": "Used",
+      "color": "White-blue"
+    },
+    {
+      "id": 2,
+      "image": null,
+      "name": "TOYOTA",
+      "model": "Camry",
+      "year": "2019",
+      "dateOfInventory": "2022-11-07",
+      "numberOfCars": "55",
+      "price": "24,000",
+      "mileage": "30,000",
+      "status": "Used",
+      "color": "White"
+    },
+    {
+      "id": 3,
+      "image": null,
+      "name": "TOYOTA",
+      "model": "Camry",
+      "year": "2019",
+      "dateOfInventory": "2022-11-07",
+      "numberOfCars": "55",
+      "price": "24,000",
+      "mileage": "30,000",
+      "status": "Used",
+      "color": "White"
+    }
+  ]
+}
